@@ -1,10 +1,22 @@
 import { JwtDecodeResult, SimpleJwtPayload, JwtDecodeError, JwtHeader } from "./jwt-decode-results";
 
+/**
+ * Decodes JWT tokens as either a simple default form or custom type.
+ */
 export class JwtDecoder {
+  /**
+   * Decode a JWT using the simple payload type.
+   */
   static simpleDecodeJwt(jwt: string) : JwtDecodeResult<SimpleJwtPayload> {
     return this.decodeJwt<SimpleJwtPayload>(jwt);
   }
 
+  /**
+   * Decode a JWT using a payload type of your choice - with optional required properties.
+   * 
+   * @param jwt The JWT.
+   * @param requiredProperties An optional list of properties the JWT JSON must have.
+   */
   static decodeJwt<T>(jwt: string, requiredProperties: (keyof T)[] = []) : JwtDecodeResult<T> {
     const jwtComponents : string[] = jwt.split(".");
     
@@ -91,4 +103,6 @@ export class JwtDecoder {
     }
     return false;
   }
+
+  private constructor() {}
 }

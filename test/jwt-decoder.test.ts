@@ -1,4 +1,4 @@
-import { JwtDecoder, JwtDecodeError, DecodedJwt, SimpleJwtPayload } from "../src/index"
+import { JwtDecoder, JwtDecodeError, DecodedJwt, SimpleJwtPayload, isDecodedJwt } from "../src/index"
 
 test('with an unparseable token (no dots)', () => {
   expect(JwtDecoder.simpleDecodeJwt("")).toBe(JwtDecodeError.MangledJwt);
@@ -46,12 +46,15 @@ interface ConstrainedPayloadExample {
 test('with invalid constrained payload contents', () => {
   const headerJson = btoa(JSON.stringify({alg: "RS256"}));
   const payloadJson = btoa(JSON.stringify({}));
-  expect(JwtDecoder.decodeJwt<ConstrainedPayloadExample>(`${headerJson}.${payloadJson}`, ['item'])).toBe(JwtDecodeError.InvalidPayloadObject);
+  const decodeResult = JwtDecoder.decodeJwt<ConstrainedPayloadExample>(`${headerJson}.${payloadJson}`, ['item']);
+  expect(isDecodedJwt(decodeResult)).toBe(false);
+  expect(decodeResult).toBe(JwtDecodeError.InvalidPayloadObject);
 });
 
 test('with valid constrained payload contents', () => {
   const headerJson = btoa(JSON.stringify({alg: "RS256"}));
   const payloadJson = btoa(JSON.stringify({item: "hi"}));
   const decodeResult = JwtDecoder.decodeJwt<ConstrainedPayloadExample>(`${headerJson}.${payloadJson}`, ['item']);
+  expect(isDecodedJwt(decodeResult)).toBe(true);
   expect(decodeResult).toStrictEqual<DecodedJwt<ConstrainedPayloadExample>>({"header": {"alg": "RS256"}, "payload": {"item": "hi"}, "raw": "eyJhbGciOiJSUzI1NiJ9.eyJpdGVtIjoiaGkifQ=="});
 });

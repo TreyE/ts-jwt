@@ -1,22 +1,26 @@
 {
   "name": "@treye/ts-jwt",
-  "version": "0.1.0",
-  "description": "Decode and work with JWTs.",
+  "version": "0.2.0",
+  "description": "Decode and work with JWTs in a type-safe way.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "homepage": "https://github.com/TreyE/ts-jwt",
   "scripts": {
+    "prepare": "tsc",
     "build": "tsc",
-    "test" : "jest"
+    "docs": "npx typedoc src/index.ts --readme none",
+    "test": "jest"
   },
-  "author": "lewis.r.evans@gmail.com",
+  "author": "https://github.com/TreyE",
   "license": "MIT",
-  "keywords" : [
+  "keywords": [
     "jwt"
   ],
   "devDependencies": {
     "@types/jest": "^28.1.6",
     "jest": "^28.1.3",
     "ts-jest": "^28.0.7",
+    "typedoc": "^0.23.10",
     "typescript": "^4.7.4"
   },
   "files": [
