@@ -19,3 +19,7 @@ A single class is exposed to decode JWTs: `JwtDecoder`.
 The class offers two static methods:
 1. `simpleDecodeJwt(jwt: string): JwtDecodeResult<SimpleJwtPayload>` - decode a JWT into a structure using a simplified, default payload type.
 2. `decodeJwt<T>(jwt: string, requiredProperties?: (keyof T)[]): JwtDecodeResult<T>` - decode a JWT into a structure with a payload interface of your choosing.
+
+## Documentation
+
+Documentation can be found in the `docs` folder of the package.  If you're working with the source you can generate it with `npm docs`.

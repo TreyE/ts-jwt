@@ -1,12 +1,11 @@
 {
   "name": "@treye/ts-jwt",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Decode and work with JWTs in a type-safe way.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "homepage": "https://github.com/TreyE/ts-jwt",
   "scripts": {
-    "prepare": "tsc",
     "build": "tsc",
     "docs": "npx typedoc src/index.ts --readme none",
     "test": "jest"
@@ -24,6 +23,7 @@
     "typescript": "^4.7.4"
   },
   "files": [
-    "lib/**/*"
+    "lib/**/*",
+    "docs/**/*"
   ]
 }
